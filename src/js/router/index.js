@@ -31,3 +31,4 @@ export default async function router(pathname = window.location.pathname) {
       await import("./views/notFound.js");
   }
 }
+
