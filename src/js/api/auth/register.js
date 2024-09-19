@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (response.ok) {
         alert('Registration successful! You can now log in.');
         window.location.href = '/auth/login/';
+        console.log(data)
       } else {
         console.log('Response status:', response.status);
         console.log('Response data:', data);
