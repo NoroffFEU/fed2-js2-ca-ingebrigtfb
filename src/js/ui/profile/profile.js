@@ -9,7 +9,6 @@ export async function profile() {
     console.error("No active user found.");
     return;
   }
-
   try {
     const profile = await readProfile(user); 
 
@@ -27,12 +26,8 @@ export async function profile() {
     const postCount = document.createElement("p");
     postCount.textContent = `Total posts: ${profile._count.posts}`;
 
-    const editBtn = document.createElement("a");
-    editBtn.href = "/profile/edit/";
-    editBtn.textContent = "Update profile";
-    editBtn.classList.add("edit-btn");
 
-    profileContainer.append(img, userNameElement, bio, postCount, editBtn);
+    profileContainer.append(img, userNameElement, bio, postCount);
 
     return profileContainer;
   } catch (error) {

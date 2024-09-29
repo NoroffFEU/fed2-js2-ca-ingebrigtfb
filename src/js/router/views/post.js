@@ -1,3 +1,5 @@
-alert("Single Post Page");
+//alert("Single Post Page");
 
-import {viewPosts} from "../../ui/post/singlePost"; 
+import {singlePost} from "../../ui/post/singlePost"; 
+
+singlePost();

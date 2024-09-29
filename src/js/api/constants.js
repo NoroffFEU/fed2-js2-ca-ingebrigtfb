@@ -14,6 +14,10 @@ export const API_AUTH_KEY = `${API_AUTH}/create-api-key`;
 
 export const API_SOCIAL = `${API_BASE}/social`;
 
+export const API_SOCIAL_POSTS_AUTHOR = `${API_SOCIAL}/posts?_author=true`;
+
 export const API_SOCIAL_POSTS = `${API_SOCIAL}/posts`;
 
 export const API_SOCIAL_PROFILES = `${API_SOCIAL}/profiles`;
+
+export const API_SOCIAL_PROFILES_POSTS = (username) => `${API_SOCIAL_PROFILES}/${username}/posts`;

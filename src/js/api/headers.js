@@ -7,7 +7,6 @@ export function headers(token) {
     headers.append("X-Noroff-API-Key", API_KEY);
   }
   headers.append("Content-Type", "application/json");
-
   if (token) {
     headers.append("Authorization", `Bearer ${token}`);
   }

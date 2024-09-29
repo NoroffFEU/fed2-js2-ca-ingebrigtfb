@@ -1,27 +1,53 @@
 import { readPosts } from "../../api/post/read";
 
-let currentPage = 1;
-const postsPerPage = 12;
-
 export async function allPosts() {
-    try {
-        const posts = await readPosts(postsPerPage, currentPage);
-        console.log(posts);
+  try {
+    const posts = await readPosts();
+    console.log(posts);
 
-        const ul = document.getElementById("posts-container");
-        ul.innerHTML = "";
+    posts.sort((a, b) => new Date(b.updated) - new Date(a.updated));
 
-        const imagePosts = posts.filter(post => post.media && post.media.url);
+    const display12Posts = document.getElementById("posts-container");
+    display12Posts.innerHTML = "";
 
-        imagePosts.forEach(post => {
-            const li = document.createElement("li");
-            li.innerHTML = `
+    const loggedInUser = localStorage.getItem('userName');
+    console.log("Logged-in user:", loggedInUser);
+
+    posts.forEach((post) => {
+      const postElement = document.createElement("div");
+      postElement.classList.add("post-item");
+
+      const link = document.createElement("a");
+      link.href = `/post/?id=${post.id}`;
+
+      const mediaContent =
+        post.media && post.media.url
+          ? `<img src="${post.media.url}" alt="${
+              post.media.alt || post.title
+            }">`
+          : "";
+
+      link.innerHTML = `
                 <h2>${post.title}</h2>
-                <img src="${post.media.url}" alt="${post.title}">
+                <p>${post.body}</p>
+                <p>Author: ${post.author.name}</p> 
+                ${mediaContent}
             `;
-            ul.appendChild(li);
-        });
-    } catch (error) {
-        console.log(error.message);
-    }
+            console.log("Post author:", post.author.name);
+            console.log(loggedInUser.name);
+
+
+      if (post.author.name === loggedInUser) {
+        const editButton = document.createElement("a");
+        editButton.href = `/post/edit/?id=${post.id}`; 
+        editButton.textContent = "Edit Post";
+        editButton.classList.add("edit-btn"); 
+        postElement.appendChild(editButton);
+      }
+      postElement.appendChild(link);
+      display12Posts.appendChild(postElement);
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
 }
