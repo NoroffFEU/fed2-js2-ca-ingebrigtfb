@@ -10,8 +10,39 @@
 
   <body>
     <h1>Edit Post</h1>
-
+    <div id="nav">
+    <a href="/profile/">My Profile</a>
+    <a href="/auth/login/">Login</a>
+    <a href="/auth/register/">Register</a>
+    <a href="/post/create/">Create Post</a>
+    <button id="logout">Logout</button>
+    </div>
     <form name="editPost">
+      <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+      </div>
+    
+      <div>
+        <label for="body">Body:</label>
+        <textarea name="body" id="body" cols="30" rows="10" maxlength="2000" required></textarea>
+      </div>
+    
+      <div>
+        <label for="mediaUrl">Media URL:</label>
+        <input type="url" name="mediaUrl" id="mediaUrl">
+      </div>
+    
+      <div>
+        <label for="mediaAlt">Media Alt:</label>
+        <input type="text" name="mediaAlt" id="mediaAlt">
+      </div>
+    
+      <div>
+        <label for="tags">Tags:</label>
+        <input type="text" name="tags" id="tags">
+      </div>
+      
       <button>Edit Post</button>
     </form>
   </body>
