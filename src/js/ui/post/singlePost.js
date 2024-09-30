@@ -13,7 +13,7 @@ export async function singlePost() {
     const postId = url.searchParams.get("id");
 
     const post = await readPost(postId);
-    console.log(post);
+    //console.log(post);
 
     const postContainer = document.getElementById("idPostContainer");
 
