@@ -1,4 +1,5 @@
 import { readPosts } from "../../api/post/read";
+import { onDeletePost } from "../../ui/post/delete";
 
 export async function allPosts() {
   try {
@@ -10,7 +11,7 @@ export async function allPosts() {
     const display12Posts = document.getElementById("posts-container");
     display12Posts.innerHTML = "";
 
-    const loggedInUser = localStorage.getItem('userName');
+    const loggedInUser = localStorage.getItem("userName");
     console.log("Logged-in user:", loggedInUser);
 
     posts.forEach((post) => {
@@ -33,16 +34,23 @@ export async function allPosts() {
                 <p>Author: ${post.author.name}</p> 
                 ${mediaContent}
             `;
-            console.log("Post author:", post.author.name);
-            console.log(loggedInUser.name);
-
+      console.log("Post author:", post.author.name);
 
       if (post.author.name === loggedInUser) {
         const editButton = document.createElement("a");
-        editButton.href = `/post/edit/?id=${post.id}`; 
+        editButton.href = `/post/edit/?id=${post.id}`;
         editButton.textContent = "Edit Post";
-        editButton.classList.add("edit-btn"); 
+        editButton.classList.add("edit-btn");
         postElement.appendChild(editButton);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete Post";
+        deleteButton.classList.add("delete-btn");
+
+        deleteButton.setAttribute("data-post-id", post.id);
+        postElement.appendChild(deleteButton);
+
+        deleteButton.addEventListener("click", onDeletePost);
       }
       postElement.appendChild(link);
       display12Posts.appendChild(postElement);

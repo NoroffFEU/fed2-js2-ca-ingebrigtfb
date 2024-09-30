@@ -1,6 +1,6 @@
 export function onLogout() {
 
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("userName");
   
   }

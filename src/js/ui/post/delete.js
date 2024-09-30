@@ -12,7 +12,7 @@ export async function onDeletePost(event) {
       if (userConfirm) {
         deletePost(postId);
         alert(`Post was deleted!`);
-        window.location.href = "/profile";
+        window.location.reload();
       }
     } catch (error) {
       alert(error.message);

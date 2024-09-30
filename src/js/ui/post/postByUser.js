@@ -54,7 +54,6 @@ function displayUserPosts(posts) {
   
       postLink.appendChild(editButton);
       postLink.appendChild(deleteButton);
-  
 
       postElement.appendChild(postLink);
       postsContainer.appendChild(postElement);
