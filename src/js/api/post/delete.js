@@ -1,6 +1,13 @@
 import { API_SOCIAL_POSTS } from "../constants";
 import { headers as getHeaders } from "../headers";
 
+/**
+ * Deletes a post by its ID.
+ *
+ * @param {number} id - The ID of the post to delete.
+ * @returns {Object} - The server response data.
+ * @throws {Error} - If the deletion fails.
+ */
 
 export async function deletePost(id) {
     const token = localStorage.getItem("token"); 

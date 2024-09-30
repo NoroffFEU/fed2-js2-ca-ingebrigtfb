@@ -1,10 +1,18 @@
 import { readPosts } from "../../api/post/read";
 import { onDeletePost } from "../../ui/post/delete";
 
+/**
+ * Fetches and displays all posts, sorted by the latest updates.
+ * If the post belongs to the logged-in user, "Edit" and "Delete" buttons are shown.
+ *
+ * @returns {Promise<void>} - Displays posts and handles the user's ability to edit or delete their own posts.
+ * @throws {Error} - Logs an error if fetching or displaying posts fails.
+ */
+
 export async function allPosts() {
   try {
     const posts = await readPosts();
-    console.log(posts);
+    //console.log(posts);
 
     posts.sort((a, b) => new Date(b.updated) - new Date(a.updated));
 
@@ -12,7 +20,7 @@ export async function allPosts() {
     display12Posts.innerHTML = "";
 
     const loggedInUser = localStorage.getItem("userName");
-    console.log("Logged-in user:", loggedInUser);
+    //console.log("Logged-in user:", loggedInUser);
 
     posts.forEach((post) => {
       const postElement = document.createElement("div");
@@ -34,7 +42,7 @@ export async function allPosts() {
                 <p>Author: ${post.author.name}</p> 
                 ${mediaContent}
             `;
-      console.log("Post author:", post.author.name);
+      //console.log("Post author:", post.author.name);
 
       if (post.author.name === loggedInUser) {
         const editButton = document.createElement("a");

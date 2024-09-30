@@ -1,5 +1,13 @@
 import { deletePost } from '../../api/post/delete';
 
+/**
+ * Handles the deletion of a post when the delete button is clicked.
+ *
+ * @param {Event} event - The click event from the delete button.
+ * @returns {Promise<void>} - Reloads the page upon successful deletion.
+ * @throws {Error} - Displays an alert if the post deletion fails.
+ */
+
 export async function onDeletePost(event) {
     event.preventDefault();
   

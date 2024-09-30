@@ -1,5 +1,12 @@
 import { fetchPost, updatePost } from "../../api/post/update";
 
+/**
+ * Handles the process of editing a post, including fetching and updating post data.
+ *
+ * @returns {Promise<void>} - Fetches the post data, populates the form, and updates the post on submission.
+ * @throws {Error} - Logs an error if fetching or updating the post fails.
+ */
+
 export async function handleEditPost() {
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get("id");

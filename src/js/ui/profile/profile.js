@@ -1,9 +1,16 @@
 import { readProfile } from "../../api/profile/read";
 import { activeUser } from "../../utilities/activeUser";
 
+/**
+ * Fetches and displays the active user's profile information.
+ *
+ * @returns {Promise<void>} - Displays the user's profile, including avatar, name, bio, and post count.
+ * @throws {Error} - Logs an error if fetching or displaying the profile fails.
+ */
+
 export async function profile() {
   const user = activeUser();
-  console.log(user); 
+  //console.log(user); 
 
   if (!user) {
     console.error("No active user found.");

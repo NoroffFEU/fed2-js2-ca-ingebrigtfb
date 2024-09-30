@@ -1,5 +1,13 @@
 import { createPost } from '../../api/post/create';
 
+/**
+ * Handles the creation of a new post from a form submission.
+ *
+ * @param {Event} event - The form submission event.
+ * @returns {Promise<void>} - Redirects to the home page upon successful post creation.
+ * @throws {Error} - Displays an alert if the post creation fails.
+ */
+
 export async function onCreatePost(event) {
     event.preventDefault();
 

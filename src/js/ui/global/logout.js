@@ -1,5 +1,11 @@
 import { onLogout } from '../auth/logout';
 
+/**
+ * Sets up the logout button listener.
+ * When the user clicks the button, they are asked for confirmation.
+ * If confirmed, the user is logged out and redirected to the login page.
+ */
+
 export function setLogoutListener() {
   const logoutBtn = document.getElementById("logout");
 
