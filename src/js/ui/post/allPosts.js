@@ -23,47 +23,55 @@ export async function allPosts() {
     //console.log("Logged-in user:", loggedInUser);
 
     posts.forEach((post) => {
-      const postElement = document.createElement("div");
-      postElement.classList.add("post-item");
-
-      const link = document.createElement("a");
-      link.href = `/post/?id=${post.id}`;
+      const postElement = document.createElement("a");
+      postElement.href = `/post/?id=${post.id}`;
+      postElement.classList.add("post-item", "bg-white", "p-6", "rounded-lg", "shadow-md", "overflow-hidden", "block", "hover:shadow-lg", "transition-shadow", "duration-300");
 
       const mediaContent =
         post.media && post.media.url
           ? `<img src="${post.media.url}" alt="${
               post.media.alt || post.title
-            }">`
+            }" class="w-full h-64 object-cover mb-4 rounded-md">`
           : "";
 
-      link.innerHTML = `
-                <h2>${post.title}</h2>
-                <p>${post.body}</p>
-                <p>Author: ${post.author.name}</p> 
-                ${mediaContent}
-            `;
-      //console.log("Post author:", post.author.name);
+      postElement.innerHTML = `
+        <h2 class="text-2xl font-bold text-gray-800 mb-2 truncate">${post.title}</h2>
+        <p class="text-gray-600 mb-2">${post.body}</p>
+        <p class="text-gray-500 mb-2">Author: ${post.author.name}</p>
+        ${mediaContent}
+      `;
 
       if (post.author.name === loggedInUser) {
         const editButton = document.createElement("a");
         editButton.href = `/post/edit/?id=${post.id}`;
         editButton.textContent = "Edit Post";
-        editButton.classList.add("edit-btn");
-        postElement.appendChild(editButton);
+        editButton.classList.add("bg-blue-500", "text-white", "px-4", "py-2", "rounded-md", "hover:bg-blue-600", "focus:outline-none", "focus:ring-2", "focus:ring-blue-500", "mr-2", "inline-block");
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete Post";
-        deleteButton.classList.add("delete-btn");
+        deleteButton.classList.add("bg-red-500", "text-white", "px-4", "py-2", "rounded-md", "hover:bg-red-600", "focus:outline-none", "focus:ring-2", "focus:ring-red-500");
+        deleteButton.onclick = (event) => {
+          event.stopPropagation();
+          event.preventDefault();
+          onDeletePost(post.id);
+        };
 
-        deleteButton.setAttribute("data-post-id", post.id);
-        postElement.appendChild(deleteButton);
+        const buttonContainer = document.createElement("div");
+        buttonContainer.classList.add("mt-4");
+        buttonContainer.appendChild(editButton);
+        buttonContainer.appendChild(deleteButton);
 
-        deleteButton.addEventListener("click", onDeletePost);
+        postElement.appendChild(buttonContainer);
       }
-      postElement.appendChild(link);
+
       display12Posts.appendChild(postElement);
     });
   } catch (error) {
-    console.log(error.message);
+    console.error("Error fetching or displaying posts:", error);
   }
 }
+
+document.getElementById('menu-toggle').addEventListener('click', function () {
+  document.getElementById('menu').classList.toggle('hidden');
+});
+

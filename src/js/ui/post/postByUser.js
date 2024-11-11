@@ -39,41 +39,42 @@ function displayUserPosts(posts) {
 
   posts.forEach((post) => {
     const postElement = document.createElement("div");
-    postElement.classList.add("post-item");
+    postElement.classList.add("post-item", "bg-white", "p-6", "rounded-lg", "shadow-md", "overflow-hidden", "block", "hover:shadow-lg", "transition-shadow", "duration-300");
 
     const postLink = document.createElement("a");
     postLink.href = `/post/?id=${post.id}`;
-    postLink.classList.add("post-link");
+    postLink.classList.add("post-link", "block", "mb-4");
+
+    const mediaContent =
+      post.media && post.media.url
+        ? `<img src="${post.media.url}" alt="${post.media.alt || post.title}" class="w-full h-64 object-cover mb-4 rounded-md">`
+        : "";
 
     postLink.innerHTML = `
-        <h3>${post.title}</h3>
-        <p>${post.body || "No content available"}</p>
-        ${
-          post.media && post.media.url
-            ? `<img src="${post.media.url}" alt="${
-                post.media.alt || post.title
-              }">`
-            : ""
-        }
-      `;
+      <h3 class="text-2xl font-bold text-gray-800 mb-2 truncate">${post.title}</h3>
+      <p class="text-gray-600 mb-2">${post.body || "No content available"}</p>
+      ${mediaContent}
+    `;
 
     const editButton = document.createElement("a");
     editButton.href = `/post/edit/?id=${post.id}`;
     editButton.textContent = "Edit Post";
-    editButton.classList.add("edit-btn");
+    editButton.classList.add("edit-btn", "bg-blue-500", "text-white", "px-4", "py-2", "rounded-md", "hover:bg-blue-600", "focus:outline-none", "focus:ring-2", "focus:ring-blue-500", "mr-2",  "inline-block");
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete Post";
-    deleteButton.classList.add("delete-btn");
+    deleteButton.classList.add("delete-btn", "bg-red-500", "text-white", "px-4", "py-2", "rounded-md", "hover:bg-red-600", "focus:outline-none", "focus:ring-2", "focus:ring-red-500");
 
     deleteButton.setAttribute("data-post-id", post.id);
-
     deleteButton.addEventListener("click", onDeletePost);
 
-    postLink.appendChild(editButton);
-    postLink.appendChild(deleteButton);
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("mt-4");
+    buttonContainer.appendChild(editButton);
+    buttonContainer.appendChild(deleteButton);
 
     postElement.appendChild(postLink);
+    postElement.appendChild(buttonContainer);
     postsContainer.appendChild(postElement);
   });
 }

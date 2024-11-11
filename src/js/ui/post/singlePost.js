@@ -26,7 +26,7 @@ export async function singlePost() {
      * @returns {string} - The formatted date and time (DD/MM/YYYY HH:MM).
      */
 
-    function formatDate(isoString) {
+    function formatDate(isoString) { 
       const date = new Date(isoString);
 
       const formattedDate = date.toLocaleDateString("en-GB");
@@ -40,21 +40,23 @@ export async function singlePost() {
     }
 
     const postElement = document.createElement("div");
-    postElement.classList.add("post-item");
+    postElement.classList.add("post-item", "bg-white", "p-6", "rounded-lg", "shadow-md", "overflow-hidden");
 
     const mediaContent =
       post.media && post.media.url
-        ? `<img src="${post.media.url}" alt="${post.media.alt || post.title}">`
+        ? `<div class="flex justify-center mb-4">
+             <img src="${post.media.url}" alt="${post.media.alt || post.title}" class="w-6/12 h-auto rounded-md">
+           </div>`
         : "";
 
-    postElement.innerHTML = `
-            <h2>${post.title}</h2>
-            <p>${post.body}</p>
-            ${mediaContent}
-            <p>Sjanger: ${post.tags}</p>
-            <p>Artikkel oppdatert: ${formatDate(post.updated)}</p>
-        <p>Artikkel laget: ${formatDate(post.created)}</p>
-        `;
+        postElement.innerHTML = `
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">${post.title}</h2>
+        <p class="text-gray-600 mb-2">${post.body}</p>
+        ${mediaContent}
+        <p class="text-gray-500 mb-2">Tags: ${post.tags.join(", ")}</p>
+        <p class="text-gray-500 mb-2">Updated: ${formatDate(post.updated)}</p>
+        <p class="text-gray-500 mb-2">Created: ${formatDate(post.created)}</p>
+      `;
 
     postContainer.appendChild(postElement);
   } catch (error) {
